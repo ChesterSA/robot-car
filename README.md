@@ -25,6 +25,3 @@ split this into 2 operators if you wish);
 - move-to-junction - move a car to a junction/exchange from its current corridor
 (you may combine this with other move operators if you wish)
 - rotate-car - rotate a car (and its stock) this can only happen at a junction
-You will also need to specify world knowledge (static/unchanging tuples) to capture
-details about which junctions connect to which corridors, where the bays are and the
-location of exchanges.
