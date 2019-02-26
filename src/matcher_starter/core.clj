@@ -238,7 +238,7 @@
 (def ops
   '{collect-stock {:pre ( (car ?agent)
                    (manipulable ?obj)
-                   (at ?agent ?bay)
+                   (near ?agent ?bay)
                    (in ?obj ?bay)
                    (holds ?agent nothing))
             :add ( (holds ?agent ?obj))
@@ -247,7 +247,7 @@
             :txt (collect ?obj from ?bay)
             :cmd [collect-stock ?obj]
             }
-    deposit-stock {:pre ( (at ?agent ?bay)
+    deposit-stock {:pre ( (near ?agent ?bay)
                     (holds ?agent ?obj)
                     )
              :add ( (holds ?agent nothing)
@@ -262,8 +262,8 @@
                         (in ?zone ?agent)
                         (in ?zone ?bay)
                )
-          :add ((at ?agent ?bay))
-          :del ((at ?agent ?corridor))
+          :add ((near ?agent ?bay))
+          :del ()
           :txt (move ?agent from C- ?corridor to B- ?bay)
           :cmd [B-move ?agent to ?bay]
           }
@@ -276,22 +276,11 @@
                         (in ?zone ?junction)
                         )
                  :add ((at ?agent ?junction))
-                 :del ((at ?agent ?corridor))
+                 :del ((at ?agent ?corridor)
+                        (near ?agent ?bay))
                  :txt (move ?agent from C- ?corridor to J- ?junction)
                  :cmd [J-move ?agent to ?junction]
                  }
-    move-to-corridor-from-bay {:pre ( (car ?agent)
-                                      (at ?agent ?bay)
-                                      (corridor ?corridor)
-                                      (at ?bay ?corridor)
-                                      (in ?zone ?agent)
-                                      (in ?zone ?corridor)
-                             )
-                      :add ((at ?agent ?corridor))
-                      :del ((at ?agent ?bay))
-                      :txt (move ?agent from B- ?bay to C- ?corridor)
-                      :cmd [C-move ?agent to ?corridor]
-                      }
     move-to-corridor-from-junction {:pre ( (car ?agent)
                                            (at ?agent ?junction)
                                            (orientation ?agent ?orientation)
