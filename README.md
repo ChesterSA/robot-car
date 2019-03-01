@@ -1,4 +1,4 @@
--# Robot Car Driver
+## Robot Car Driver
 Uses Clojure ops-search from github.com/cognesence to work out the route for a robot car to move stock around a warehouse
 
 ## Specification
