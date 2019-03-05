@@ -12,13 +12,13 @@
 (defn gen-moves [n]
   (list (* n 10) (/ n 2) (+ n 5) (- n 3)))
 
-(def world-junc
+(def world-one
   '#{
      (connects c1 j1)
      (connects c4 j1)
      (has c1 b1)
      (has c4 b4)
-     (orientation c1 vertical)
+     (orientation c1 horizontal)
      (orientation c4 vertical)
      (contains z1 c1)
      (contains z1 c4)
@@ -27,11 +27,18 @@
      (contains z1 b4)}
   )
 
-(def world-exchange
+(def world-two
   '#{
+     (connects c1 j1)
+     (connects c4 j1)
+     (has c1 b1)
      (has c4 b4)
+     (orientation c1 horizontal)
      (orientation c4 vertical)
+     (contains z1 c1)
      (contains z1 c4)
+     (contains z1 j1)
+     (contains z1 b1)
      (contains z1 b4)
 
      (has c4 e1)
@@ -86,7 +93,7 @@
      }
   )
 
-(def world-test
+(def world-three
   '#{
      (connects c1 j1)
      (connects c4 j1)
@@ -119,32 +126,32 @@
      }
   )
 
-(def state-exchange
+(def state-two
   '#{(manipulable box)
-     (stores b4 box)
+     (stores b1 box)
      (contains z1 box)
 
      (car robot-1)
-     (in robot-1 c4)
+     (at robot-1 j1)
      (contains z1 robot-1)
      (orientation robot-1 vertical)
      (holds robot-1 nothing)
 
      (car robot-2)
-     (in robot-2 c5)
+     (at robot-2 j2)
      (contains z2 robot-2)
      (orientation robot-2 vertical)
      (holds robot-2 nothing)
      }
   )
 
-(def state-junc
+(def state-one
   '#{(manipulable box)
      (stores b1 box)
      (contains z1 box)
 
      (car robot-1)
-     (in robot-1 c4)
+     (at robot-1 j1)
      (contains z1 robot-1)
      (holds robot-1 nothing)
      (orientation robot-1 vertical)
@@ -158,32 +165,32 @@
 
      (car robot-1)
      (orientation robot-1 horizontal)
-     (in robot-1 c1)
+     (at robot-1 j1)
      (contains z1 robot-1)
      (holds robot-1 nothing)
 
      (car robot-2)
      (orientation robot-2 vertical)
-     (in robot-2 c5)
+     (at robot-2 j2)
      (contains z2 robot-2)
      (holds robot-2 nothing)
      }
   )
 
-(def state-test
+(def state-three
   '#{(manipulable box)
      (stores b1 box)
      (contains z1 box)
 
      (car robot-1)
      (orientation robot-1 horizontal)
-     (in robot-1 c1)
+     (at robot-1 j1)
      (contains z1 robot-1)
      (holds robot-1 nothing)
 
      (car robot-2)
      (orientation robot-2 vertical)
-     (in robot-2 c5)
+     (at robot-2 j2)
      (contains z2 robot-2)
      (holds robot-2 nothing)
      }

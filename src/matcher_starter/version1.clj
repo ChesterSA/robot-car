@@ -10,7 +10,7 @@
 (defn gen-moves [n]
   (list (* n 10) (/ n 2) (+ n 5) (- n 3)))
 
-     (def world-junc
+     (def world-one
        '#{
           (connects c1 j1)
           (connects c4 j1)
@@ -23,7 +23,7 @@
           (junction j1)
           (corridor c1)
           (corridor c4)
-          (orientation c1 vertical)
+          (orientation c1 horizontal)
           (orientation c4 vertical)
           (in z1 c1)
           (in z1 c4)
@@ -32,8 +32,20 @@
           (in z1 b4)}
        )
 
-     (def world-exchange
+     (def world-two
        '#{
+          (connects c1 j1)
+          (connects c4 j1)
+          (connects j1 c1)
+          (connects j1 c4)
+          (at b1 c1)
+          (has c1 b1)
+          (junction j1)
+          (corridor c1)
+          (orientation c1 horizontal)
+          (in z1 c1)
+          (in z1 j1)
+          (in z1 b1)
           (at b4 c4)
           (has c4 b4)
           (corridor c4)
@@ -54,6 +66,9 @@
           (orientation c5 vertical)
           (in z2 c5)
           (in z2 b5)
+          (connects c5 j2)
+          (junction j2)
+          (in z2 j2)
           }
        )
 
@@ -116,7 +131,7 @@
           }
        )
 
-       (def world-test
+       (def world-three
          '#{
             (connects c1 j1)
             (connects c4 j1)
@@ -163,31 +178,31 @@
             }
          )
 
-       (def state-exchange
+       (def state-two
          '#{(manipulable box)
-            (in box b4)
+            (in box b1)
             (in z1 box)
 
             (car robot-1)
-            (at robot-1 c4)
+            (at robot-1 j1)
             (in z1 robot-1)
             (orientation robot-1 vertical)
             (holds robot-1 nothing)
 
             (car robot-2)
-            (at robot-2 c5)
+            (at robot-2 j2)
             (in z2 robot-2)
             (orientation robot-2 vertical)
             (holds robot-2 nothing)
             }
          )
 
-       (def state-junc
+       (def state-one
          '#{(manipulable box)
             (in box b1)
             (in z1 box)
             (car robot-1)
-            (at robot-1 c4)
+            (at robot-1 j1)
             (in z1 robot-1)
             (holds robot-1 nothing)
             (orientation robot-1 vertical)
@@ -211,19 +226,19 @@
             }
          )
 
-       (def state-test
+       (def state-three
          '#{(manipulable box)
             (in box b1)
             (in z1 box)
 
             (car robot-1)
             (orientation robot-1 horizontal)
-            (at robot-1 c1)
+            (at robot-1 j1)
             (in z1 robot-1)
             (holds robot-1 nothing)
 
             (car robot-2)
-            (at robot-2 c6)
+            (at robot-2 j2)
             (orientation robot-2 vertical)
             (in z2 robot-2)
             (holds robot-2 nothing)
