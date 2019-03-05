@@ -140,7 +140,7 @@
      (contains z1 box)
 
      (car robot-1)
-     (orientation robot-1 vertical)
+     (orientation robot-1 horizontal)
      (at robot-1 j1)
      (contains z1 robot-1)
      (holds robot-1 nothing)

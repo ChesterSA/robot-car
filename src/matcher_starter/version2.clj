@@ -46,10 +46,12 @@
      (contains z1 e1)
      (contains z2 e1)
 
+     (connects c5 j2)
      (has c5 b5)
      (orientation c5 vertical)
      (contains z2 c5)
-     (contains z2 b5)}
+     (contains z2 b5)
+     (contains z2 j2)}
   )
 
 (def world-all
@@ -126,25 +128,28 @@
      }
   )
 
+;(time ((ops-search state-two '((stores b5 box)) ops :world world-two) :txt) )
 (def state-two
-  '#{(manipulable box)
+  '#{
+     (manipulable box)
      (stores b1 box)
      (contains z1 box)
 
      (car robot-1)
+     (orientation robot-1 horizontal)
      (at robot-1 j1)
      (contains z1 robot-1)
-     (orientation robot-1 vertical)
      (holds robot-1 nothing)
 
      (car robot-2)
+     (orientation robot-2 vertical)
      (at robot-2 j2)
      (contains z2 robot-2)
-     (orientation robot-2 vertical)
      (holds robot-2 nothing)
      }
   )
 
+;(time ((ops-search state-one '((stores b4 box)) ops :world world-one) :txt) )
 (def state-one
   '#{(manipulable box)
      (stores b1 box)
@@ -177,6 +182,7 @@
      }
   )
 
+;(time ((ops-search state-three '((stores b6 box)) ops :world world-three) :txt) )
 (def state-three
   '#{(manipulable box)
      (stores b1 box)
@@ -239,7 +245,7 @@
                       :add ((at ?agent ?junction))
                       :del ((in ?agent ?corridor)
                              (near ?agent ?bay))
-                      :txt (move ?agent from C- ?corridor to J- ?junction ... ?bay)
+                      :txt (move ?agent from C- ?corridor to J- ?junction)
                       :cmd [J-move ?agent to ?junction]
                       }
     move-to-corridor {:pre ( (car ?agent)

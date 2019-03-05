@@ -197,6 +197,7 @@
             }
          )
 
+;(time ((ops-search state-one '((in box b4)) ops :world world-one) :txt) )
        (def state-one
          '#{(manipulable box)
             (in box b1)
