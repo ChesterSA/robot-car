@@ -7,9 +7,6 @@
 (use 'org.clojars.cognesence.breadth-search.core)
 (use 'org.clojars.cognesence.matcher.core)
 
-(defn gen-moves [n]
-  (list (* n 10) (/ n 2) (+ n 5) (- n 3)))
-
      (def world-one
        '#{
           (connects c1 j1)
@@ -31,6 +28,19 @@
           (in z1 b1)
           (in z1 b4)}
        )
+
+    ;(time ((ops-search state-one '((in box b4)) ops :world world-one) :txt) )
+    (def state-one
+      '#{(manipulable box)
+         (in box b1)
+         (in z1 box)
+         (car robot-1)
+         (at robot-1 j1)
+         (in z1 robot-1)
+         (holds robot-1 nothing)
+         (orientation robot-1 vertical)
+         }
+      )
 
      (def world-two
        '#{
@@ -71,6 +81,91 @@
           (in z2 j2)
           }
        )
+
+    (def state-two
+      '#{(manipulable box)
+         (in box b1)
+         (in z1 box)
+
+         (car robot-1)
+         (at robot-1 j1)
+         (in z1 robot-1)
+         (orientation robot-1 vertical)
+         (holds robot-1 nothing)
+
+         (car robot-2)
+         (at robot-2 j2)
+         (in z2 robot-2)
+         (orientation robot-2 vertical)
+         (holds robot-2 nothing)
+         }
+      )
+
+    (def world-three
+      '#{
+         (connects c1 j1)
+         (connects c4 j1)
+         (connects j1 c1)
+         (connects j1 c4)
+         (at b1 c1)
+         (at b4 c4)
+         (has c1 b1)
+         (has c4 b4)
+         (junction j1)
+         (corridor c1)
+         (corridor c4)
+         (orientation c1 horizontal)
+         (orientation c4 vertical)
+         (in z1 c1)
+         (in z1 c4)
+         (in z1 j1)
+         (in z1 b1)
+         (in z1 b4)
+
+         (has c4 e1)
+         (has c5 e1)
+         (at e1 c4)
+         (at e1 c5)
+         (in z1 e1)
+         (in z2 e1)
+
+         (connects c5 j2)
+         (connects c6 j2)
+         (at b5 c5)
+         (at b6 c6)
+         (has c5 b5)
+         (has c6 b6)
+         (junction j2)
+         (corridor c5)
+         (corridor c6)
+         (orientation c5 vertical)
+         (orientation c6 horizontal)
+         (in z2 c5)
+         (in z2 c6)
+         (in z2 b5)
+         (in z2 b6)
+         (in z2 j2)
+         }
+      )
+
+    (def state-three
+      '#{(manipulable box)
+         (in box b1)
+         (in z1 box)
+
+         (car robot-1)
+         (orientation robot-1 horizontal)
+         (at robot-1 j1)
+         (in z1 robot-1)
+         (holds robot-1 nothing)
+
+         (car robot-2)
+         (at robot-2 j2)
+         (orientation robot-2 vertical)
+         (in z2 robot-2)
+         (holds robot-2 nothing)
+         }
+      )
 
      (def world-all
        '#{
@@ -131,85 +226,6 @@
           }
        )
 
-       (def world-three
-         '#{
-            (connects c1 j1)
-            (connects c4 j1)
-            (connects j1 c1)
-            (connects j1 c4)
-            (at b1 c1)
-            (at b4 c4)
-            (has c1 b1)
-            (has c4 b4)
-            (junction j1)
-            (corridor c1)
-            (corridor c4)
-            (orientation c1 horizontal)
-            (orientation c4 vertical)
-            (in z1 c1)
-            (in z1 c4)
-            (in z1 j1)
-            (in z1 b1)
-            (in z1 b4)
-
-            (has c4 e1)
-            (has c5 e1)
-            (at e1 c4)
-            (at e1 c5)
-            (in z1 e1)
-            (in z2 e1)
-
-            (connects c5 j2)
-            (connects c6 j2)
-            (at b5 c5)
-            (at b6 c6)
-            (has c5 b5)
-            (has c6 b6)
-            (junction j2)
-            (corridor c5)
-            (corridor c6)
-            (orientation c5 vertical)
-            (orientation c6 horizontal)
-            (in z2 c5)
-            (in z2 c6)
-            (in z2 b5)
-            (in z2 b6)
-            (in z2 j2)
-            }
-         )
-
-       (def state-two
-         '#{(manipulable box)
-            (in box b1)
-            (in z1 box)
-
-            (car robot-1)
-            (at robot-1 j1)
-            (in z1 robot-1)
-            (orientation robot-1 vertical)
-            (holds robot-1 nothing)
-
-            (car robot-2)
-            (at robot-2 j2)
-            (in z2 robot-2)
-            (orientation robot-2 vertical)
-            (holds robot-2 nothing)
-            }
-         )
-
-;(time ((ops-search state-one '((in box b4)) ops :world world-one) :txt) )
-       (def state-one
-         '#{(manipulable box)
-            (in box b1)
-            (in z1 box)
-            (car robot-1)
-            (at robot-1 j1)
-            (in z1 robot-1)
-            (holds robot-1 nothing)
-            (orientation robot-1 vertical)
-            }
-         )
-
        (def state-all
          '#{(manipulable box)
             (in box b2)
@@ -227,24 +243,6 @@
             }
          )
 
-       (def state-three
-         '#{(manipulable box)
-            (in box b1)
-            (in z1 box)
-
-            (car robot-1)
-            (orientation robot-1 horizontal)
-            (at robot-1 j1)
-            (in z1 robot-1)
-            (holds robot-1 nothing)
-
-            (car robot-2)
-            (at robot-2 j2)
-            (orientation robot-2 vertical)
-            (in z2 robot-2)
-            (holds robot-2 nothing)
-            }
-         )
        (def ops
          '{collect-stock {:pre ( (car ?agent)
                                  (manipulable ?obj)
